@@ -4,11 +4,11 @@ public class StepTracker {
     Scanner scanner;
     Converter converter;
     MonthData[] monthToData = new MonthData[12];
-    int goalByStepsPerDay = 5000;
+    int goalByStepsPerDay = 10000;
 
-    StepTracker(Scanner scan, Converter conv) {
+    StepTracker(Scanner scan) {
         scanner = scan;
-        converter = conv;
+        converter = new Converter();
 
         for (int i = 0; i < monthToData.length; i++) {
             monthToData[i] = new MonthData();
@@ -54,6 +54,10 @@ public class StepTracker {
     void printStatistic() {
         System.out.println("Введите номер месяца:");
         int monthNumber = scanner.nextInt();
+        if (monthNumber < 1 || monthNumber > 12) {
+            System.out.println("Неверно введён номер месяца.");
+            return;
+        }
 
         System.out.println("Количество пройденных шагов по дням:");
         monthToData[monthNumber - 1].printDaysAndStepsFromMonth();
